@@ -3,19 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Web Page</title>
+    <title>Zeitmessung</title>
+    <style>
+        .timer {
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Hello, World!</h1>
+    <button id="startButton">Start</button>
+    <button id="stopButton" disabled>Stop</button>
+    <div class="timer" id="timer">0 Sekunden</div>
 
-    <p>This is a paragraph of text.</p>
+    <script>
+        let startTime;
+        let intervalId;
 
-    <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
+        function startTimer() {
+            startTime = Date.now();
+            intervalId = setInterval(updateTimer, 1000);
+            document.getElementById("startButton").disabled = true;
+            document.getElementById("stopButton").disabled = false;
+        }
+
+        function stopTimer() {
+            clearInterval(intervalId);
+            document.getElementById("startButton").disabled = false;
+            document.getElementById("stopButton").disabled = true;
+        }
+
+        function updateTimer() {
+            const currentTime = Date.now();
+            const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+            document.getElementById("timer").innerText = `${elapsedTime} Sekunden`;
+        }
+
+        document.getElementById("startButton").addEventListener("click", startTimer);
+        document.getElementById("stopButton").addEventListener("click", stopTimer);
+    </script>
 
 </body>
 </html>
