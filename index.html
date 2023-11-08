@@ -1,47 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeitmessung</title>
-    <style>
-        .timer {
-            font-size: 24px;
-        }
-    </style>
+    <title>Texteingabe und Speichern</title>
 </head>
 <body>
 
-    <button id="startButton">Start</button>
-    <button id="stopButton" disabled>Stop</button>
-    <div class="timer" id="timer">0 Sekunden</div>
+    <h1>Texteingabe und Speichern</h1>
 
-    <script>
-        let startTime;
-        let intervalId;
-
-        function startTimer() {
-            startTime = Date.now();
-            intervalId = setInterval(updateTimer, 1000);
-            document.getElementById("startButton").disabled = true;
-            document.getElementById("stopButton").disabled = false;
-        }
-
-        function stopTimer() {
-            clearInterval(intervalId);
-            document.getElementById("startButton").disabled = false;
-            document.getElementById("stopButton").disabled = true;
-        }
-
-        function updateTimer() {
-            const currentTime = Date.now();
-            const elapsedTime = Math.floor((currentTime - startTime) / 1000);
-            document.getElementById("timer").innerText = `${elapsedTime} Sekunden`;
-        }
-
-        document.getElementById("startButton").addEventListener("click", startTimer);
-        document.getElementById("stopButton").addEventListener("click", stopTimer);
-    </script>
+    <form action="speichern.php" method="post">
+        <label for="text">Gib deinen Text ein:</label><br>
+        <input type="text" id="text" name="text"><br>
+        <input type="submit" value="Speichern">
+    </form>
 
 </body>
 </html>
